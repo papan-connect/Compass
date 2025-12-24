@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Compass | A simple tool for navigation">
+    <title>Compass | A simple tool for navigation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <header class="app-header">
+            <h1>Compass App <br><h2>by <a href="https://github.com/papan-connect" target="_blank"
+                    rel="noopener noreferrer">Papan</a></h2></h1>
+        </header>
+
+        <main class="compass-container">
+            <div class="glass-panel">
+                <div class="compass-ring"></div>
+                <!-- The dial rotates -->
+                <div class="compass-dial" id="compassDial">
+                    <div class="compass-mark north">N</div>
+                    <div class="compass-mark east">E</div>
+                    <div class="compass-mark south">S</div>
+                    <div class="compass-mark west">W</div>
+
+                    <div class="compass-ticks"></div>
+                </div>
+                <!-- The indicator stays static (or moves slightly for effect, but main reading is dial) -->
+                <div class="indicator-triangle"></div>
+
+                <div class="compass-center">
+                    <div class="readout">
+                        <span id="headingValue">0</span><span class="degree-symbol">°</span>
+                    </div>
+                    <div class="direction-text" id="directionText">N</div>
+                </div>
+            </div>
+
+            <!-- New Coordinates Section -->
+            <div class="coordinates-container glass-panel-sm">
+                <button id="openMapBtn" class="map-link-btn" aria-label="Open in Google Maps">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </button>
+                <div class="coord-item">
+                    <span class="coord-label">LAT</span>
+                    <span class="coord-value" id="latValue">--°</span>
+                </div>
+                <div class="coord-divider"></div>
+                <div class="coord-item">
+                    <span class="coord-label">LON</span>
+                    <span class="coord-value" id="lonValue">--°</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer">
+            <button id="requestPermissionBtn" class="glass-btn">Allow Compass Access</button>
+            <p class="status-text" id="statusText">Rotate your device</p>
+        </footer>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,326 @@
+:root {
+    --bg-color: #0f1115;
+    --text-primary: #ffffff;
+    --text-secondary: #8b9bb4;
+    --accent-color: #00d4ff;
+    --accent-glow: rgba(0, 212, 255, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --north-color: #ff3b30;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top right, #1a202c 0%, #0f1115 100%);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.5rem;
+    position: relative;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.app-header h1 {
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    color: var(--text-secondary);
+}
+
+.app-header h2 {
+    margin-top: 15px;
+    font-weight: 300;
+    font-size: 1.6rem;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+.app-header h2 a{
+    color: var(--accent-color);
+    text-decoration: none;
+    position: relative;
+}
+.app-header h2 a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Coordinates Section */
+.coordinates-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 280px;
+    padding: 15px 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+}
+
+.map-link-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-link-btn:hover {
+    color: var(--accent-color);
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.coord-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coord-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+}
+
+.coord-value {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: 'Outfit', monospace;
+    /* Monospace for numbers usually looks better */
+}
+
+.coord-divider {
+    width: 1px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.compass-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Changed to column to stack compass and coords */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 20px;
+    /* Space between compass and coords */
+}
+
+.glass-panel {
+    width: 300px;
+    height: 300px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Outer decorative ring */
+.compass-ring {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.compass-dial {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Will be rotated by JS */
+}
+
+.compass-ticks {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-conic-gradient(from 0deg,
+            rgba(255, 255, 255, 0.2) 0deg 1deg,
+            transparent 1deg 10deg);
+    border-radius: 50%;
+    mask-image: radial-gradient(transparent 65%, black 66%);
+    -webkit-mask-image: radial-gradient(transparent 65%, black 66%);
+}
+
+.compass-mark {
+    position: absolute;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    transform-origin: center;
+}
+
+.north {
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--north-color);
+}
+
+.south {
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.east {
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.west {
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.indicator-triangle {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 20px solid var(--accent-color);
+    filter: drop-shadow(0 0 5px var(--accent-glow));
+    z-index: 10;
+}
+
+.compass-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 5;
+}
+
+.readout {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+}
+
+.degree-symbol {
+    font-size: 1.5rem;
+    vertical-align: top;
+    color: var(--text-secondary);
+}
+
+.direction-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.app-footer {
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    margin-bottom: 56px;
+}
+
+.status-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    display: none;
+    /* Hidden by default */
+    transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+    .glass-panel {
+        width: 400px;
+        height: 400px;
+    }
+
+    .compass-ring {
+        width: 420px;
+        height: 420px;
+    }
+}
